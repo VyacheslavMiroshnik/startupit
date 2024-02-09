@@ -17,8 +17,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[ \App\Http\Controllers\ProductsController::class,'index'])->name('index');
-Route::get('/render',[ \App\Http\Controllers\ProductsController::class,'render'])->name('render');
-
 
 Route::prefix('cart')->group(function (){
     Route::get('/', [\App\Http\Controllers\CartsController::class,'index'])->name('carts')->middleware('auth');

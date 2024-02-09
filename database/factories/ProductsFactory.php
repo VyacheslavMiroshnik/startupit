@@ -18,8 +18,8 @@ class ProductsFactory extends Factory
     {
         $imgList = ['pic-1.webp','pic-2.webp'];
         return [
-            'description'=>fake()->text(255),
-            'price'=>fake()->numberBetween(100,9999999),
+            'description'=>fake()->text(150),
+            'price'=>fake()->numberBetween(100,100000),
             'img'=>fake()->randomElement($imgList)
         ];
     }

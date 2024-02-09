@@ -1,6 +1,4 @@
 
-
-
             <!-- TODO: добавлять синюю рамку карточке товара (класс border-primary), если на товар можно потратить баллы -->
             <article class="card mt-5 overflow-hidden border-primary  product__card" data-id="{{$product->id}}">
                 <div class="img-wrap">

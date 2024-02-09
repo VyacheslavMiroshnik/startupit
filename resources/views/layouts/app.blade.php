@@ -36,7 +36,7 @@
                         stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
             </a>
-@guest
+        @guest
             <a class="btn" href={{route('login')}} title="Войти">
                 <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.00098 11.999L16.001 11.999M16.001 11.999L12.501 8.99902M16.001 11.999L12.501 14.999"
@@ -46,7 +46,7 @@
                         stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
             </a>
-@endguest
+        @endguest
             <!-- Кнопка выйти -->
             @auth
                 <form action={{route('logout')}} method="POST" >
@@ -65,12 +65,8 @@
                 </form>
             @endauth
         </div>
-
     </div>
 </header>
-
 @yield('content')
-
 </body>
-
 </html>

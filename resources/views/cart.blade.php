@@ -5,13 +5,15 @@
 @endsection
 @section('content')
     <main>
-
-
         <div class="container">
             <h1 class="text-center mt-5">Корзина</h1>
             <div class="row mb-4">
-
-                @foreach($products as $product)
+            @if(!count($products))
+                <div class="col-12 col-lg-8">
+                    <h2>Корзина пуста</h2>
+                </div>
+            @endif
+            @foreach($products as $product)
                 <div class="col-12 col-lg-8">
                     <article class="card mt-4 overflow-hidden">
                         <div class="row">
@@ -39,8 +41,7 @@
                         </div>
                     </article>
                 </div>
-                @endforeach
-
+            @endforeach
                 <div class="col-12 col-lg-4">
                     <div class="card p-3 mt-4">
                         <p class="fs-4">Общая сумма заказа:</p>

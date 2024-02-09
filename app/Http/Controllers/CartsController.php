@@ -14,6 +14,8 @@ class CartsController extends Controller
         $carts = $user->products;
         return view('cart',['products'=>$carts]);
     }
+
+    /* Добавляет новый товар в корзину возвращает  */
     public function add(Request $request)
     {
         $user = Auth::user();
@@ -21,6 +23,7 @@ class CartsController extends Controller
         $user->products()->attach($product_id, ['count' => 1]);
         return self::currentProductCard($product_id,$user);
     }
+    /*  возвращает  Html компонента для перерисовки*/
     private function currentProductCard($id,$user)
     {
         $carts = $user->products;
@@ -28,6 +31,8 @@ class CartsController extends Controller
         $view = view('product',['product'=>$products,'carts'=>$carts])->render();
         return response()->json(['success' =>true,"html"=>$view]);
     }
+
+    /* Обновляет данные в корзине*/
     public function update(Request $request)
     {
         $user = Auth::user();
@@ -37,6 +42,9 @@ class CartsController extends Controller
         $pivotRow->update(['count' => $count]);
         return response()->json(['success'=>true]);
     }
+
+
+    /* Удаляет данные из корзины*/
     public function delete(Request $request)
     {
         $user = Auth::user();
