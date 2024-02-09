@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,12 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/',[ \App\Http\Controllers\ProductsController::class,'index'])->name('index');
+Route::get('/render',[ \App\Http\Controllers\ProductsController::class,'render'])->name('render');
+
+
+Route::prefix('cart')->group(function (){
+    Route::get('/', [\App\Http\Controllers\CartsController::class,'index'])->name('carts')->middleware('auth');
+    Route::post('add', [\App\Http\Controllers\CartsController::class,'add'])->name('carts.add')->middleware('auth');
+    Route::post('update', [\App\Http\Controllers\CartsController::class,'update'])->name('carts.update')->middleware('auth');
+    Route::post('delete', [\App\Http\Controllers\CartsController::class,'delete'])->name('carts.delete')->middleware('auth');
 });
-Route::get('/cart', function () {
-    return view('cart');
-});
-Route::get('/signin', function () {
-    return view('signin');
-});
+
+
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

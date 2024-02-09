@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     @vite( 'resources/js/app.js')
     @yield('style');
@@ -13,15 +14,16 @@
 <body>
 <header class="bg-dark py-2 py-md-3">
     <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 gap-md-1">
-        <a class="text-light text-decoration-none fs-4" href="/index.html">НА ГЛАВНУЮ</a>
+        <a class="text-light text-decoration-none fs-4" href="{{route('index')}}">НА ГЛАВНУЮ</a>
         <!-- TODO: скрывать, когда пользователь не авторизован -->
+    @auth
         <div class="d-flex flex-column align-items-center">
             <span class="bg-primary fs-6 text-light px-2 rounded-pill">999 баллов</span>
-            <span class="login text-light fs-6">elon-musk@spacex.com</span>
+            <span class="login text-light fs-6">{{Auth::user()->email}}</span>
         </div>
-
-        <div>
-            <a class="btn" href="" title="Корзина">
+    @endauth
+        <div class = 'd-flex'>
+            <a class="btn" href="{{route('carts')}}" title="Корзина">
                 <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M7.5 18C8.32843 18 9 18.6716 9 19.5C9 20.3284 8.32843 21 7.5 21C6.67157 21 6 20.3284 6 19.5C6 18.6716 6.67157 18 7.5 18Z"
@@ -34,8 +36,8 @@
                         stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
             </a>
-
-            <a class="btn" href="" title="Войти">
+@guest
+            <a class="btn" href={{route('login')}} title="Войти">
                 <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.00098 11.999L16.001 11.999M16.001 11.999L12.501 8.99902M16.001 11.999L12.501 14.999"
                           stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -44,18 +46,24 @@
                         stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
             </a>
+@endguest
             <!-- Кнопка выйти -->
-            <!-- <button class="btn" title="Выйти">
-                <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M9 4.5H8C5.64298 4.5 4.46447 4.5 3.73223 5.23223C3 5.96447 3 7.14298 3 9.5V14.5C3 16.857 3 18.0355 3.73223 18.7678C4.46447 19.5 5.64298 19.5 8 19.5H9"
-                        stroke="#fff" stroke-width="1.5" />
-                    <path
-                        d="M9 6.4764C9 4.18259 9 3.03569 9.70725 2.4087C10.4145 1.78171 11.4955 1.97026 13.6576 2.34736L15.9864 2.75354C18.3809 3.17118 19.5781 3.37999 20.2891 4.25826C21 5.13652 21 6.40672 21 8.94711V15.0529C21 17.5933 21 18.8635 20.2891 19.7417C19.5781 20.62 18.3809 20.8288 15.9864 21.2465L13.6576 21.6526C11.4955 22.0297 10.4145 22.2183 9.70725 21.5913C9 20.9643 9 19.8174 9 17.5236V6.4764Z"
-                        stroke="#fff" stroke-width="1.5" />
-                    <path d="M12 11V13" stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
-                </svg>
-            </button> -->
+            @auth
+                <form action={{route('logout')}} method="POST" >
+                    @csrf
+                    <button class="btn btn-exit" title="Выйти">
+                        <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 4.5H8C5.64298 4.5 4.46447 4.5 3.73223 5.23223C3 5.96447 3 7.14298 3 9.5V14.5C3 16.857 3 18.0355 3.73223 18.7678C4.46447 19.5 5.64298 19.5 8 19.5H9"
+                                stroke="#fff" stroke-width="1.5" />
+                            <path
+                                d="M9 6.4764C9 4.18259 9 3.03569 9.70725 2.4087C10.4145 1.78171 11.4955 1.97026 13.6576 2.34736L15.9864 2.75354C18.3809 3.17118 19.5781 3.37999 20.2891 4.25826C21 5.13652 21 6.40672 21 8.94711V15.0529C21 17.5933 21 18.8635 20.2891 19.7417C19.5781 20.62 18.3809 20.8288 15.9864 21.2465L13.6576 21.6526C11.4955 22.0297 10.4145 22.2183 9.70725 21.5913C9 20.9643 9 19.8174 9 17.5236V6.4764Z"
+                                stroke="#fff" stroke-width="1.5" />
+                            <path d="M12 11V13" stroke="#fff" stroke-width="1.5" stroke-linecap="round" />
+                        </svg>
+                    </button>
+                </form>
+            @endauth
         </div>
 
     </div>
