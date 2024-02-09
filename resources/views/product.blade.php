@@ -10,7 +10,7 @@
                     </h3>
                     <div class="d-flex align-items-center justify-content-between">
                         <p class="fw-bold fs-5 m-0">
-                            {{$product->price}}
+                            {{$product->price}}  ₽
                         </p>
                         @guest
                             <a class="btn btn-primary btn-add__cart"  href="{{route('login')}}">
