@@ -31,7 +31,7 @@
                                         {{$products->where('id',$product->id)->first()->pivot->count}}
                                     </p>
                                     <p class="fw-bold fs-6 m-0">
-                                        цена без скидки - {{$product->price}} ₽ / шт.
+                                        цена без скидки - {{$products->sum('price')}} ₽ / шт.
                                     </p>
                                     <p class="fw-bold fs-6 m-0">
                                         с учётом скидки <span>5%</span> - 734 616 ₽ / шт.

@@ -21,7 +21,7 @@ class ProductsFactory extends Factory
             'description'=>fake()->text(150),
             'price'=>fake()->numberBetween(100,100000),
             'img'=>fake()->randomElement($imgList),
-            'discount'=>fake()->numberBetween(0,20)
+            'discount'=>fake()->boolean()
         ];
     }
 }

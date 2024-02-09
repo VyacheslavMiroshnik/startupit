@@ -8,11 +8,40 @@ use Illuminate\Support\Facades\Auth;
 
 class CartsController extends Controller
 {
-    public function index()
+    private function calcDiscount()
+
     {
         $user = Auth::user();
+        $bonus = $user->bonus()->first()->bonus;
         $carts = $user->products;
-        return view('cart',['products'=>$carts]);
+
+        $beforePrice = $carts->sum('price');
+
+
+        if(!$beforePrice)
+        {
+            return ['products'=>[]];
+        }
+        $canDiscountPrice = $carts->where('discount',1)->sum('price');
+
+        if($bonus>$canDiscountPrice)
+        {
+            $user->bonus()->first()->bonus = $bonus - $canDiscountPrice;
+            $avgForDiscount = 1;
+        } else
+        {
+            $user->bonus()->first()->bonus = $bonus - $canDiscountPrice;
+            $avgForDiscount = ($bonus * 100 /$canDiscountPrice)/100;
+        }
+
+        $user->bonus()->first()->save();;
+        $totalDiscount = $canDiscountPrice*$avgForDiscount *100/$beforePrice;
+        $afterPrice = $beforePrice * (100-$totalDiscount) / 100;
+        return ['products'=>$carts,'beforePrice'=>$beforePrice,"totalDiscount"=>$totalDiscount,'avg'=>$avgForDiscount,'afterPrice'=>$afterPrice];
+    }
+    public function index()
+    {
+        return view('cart',self::calcDiscount());
     }
 
     /* Добавляет новый товар в корзину возвращает  */
