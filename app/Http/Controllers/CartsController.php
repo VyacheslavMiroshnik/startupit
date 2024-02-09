@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartsController extends Controller
 {
+    // Вычсление цен и скидок
     private function calcDiscount()
 
     {
@@ -23,12 +24,8 @@ class CartsController extends Controller
                 'avg'=>0,
                 'afterPrice'=>0];;
         }
-
         $beforePrice =self::sumPrice($products);
-
-
         $productDiscountPrice =self::sumPrice($products->where('discount',1));
-
         if($bonus>$productDiscountPrice)
         {
             $avgForDiscount = 100;
@@ -47,20 +44,18 @@ class CartsController extends Controller
             'afterPrice'=>$afterPrice];
     }
 
-
+///     Подсчет стоимости  из  корзины пользователя
     private function sumPrice($products)
     {
         $sum = 0;
-
         foreach($products as $product)
         {
             $sum +=  $product->price * $product->pivot->count ;
         }
-
-
         return $sum;
 
     }
+//    Базовая страница корзины
     public function index()
     {
         return view('cart',self::calcDiscount());
@@ -93,7 +88,6 @@ class CartsController extends Controller
         $pivotRow->update(['count' => $count]);
         return response()->json(['success'=>true]);
     }
-
 
     /* Удаляет данные из корзины*/
     public function delete(Request $request)

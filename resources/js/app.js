@@ -3,9 +3,14 @@ import '../css/app.css';
 import jQuery from 'jquery';
 window.$ = jQuery;
 
+// Солянка из js и jquery, управления кнопками карточки товара добавления в корзину,
+// удаления, изменения.  Отправляется post запрос("patch","delete" не заработали )
+// после успешной передачи данных, возвращается обновленная карточка с товаром
+// меняем старую и навешиваем события на новый элемент
 
+document.addEventListener('DOMContentLoaded',()=>{
 $(".product__card").click(onClick);
-
+})
 function onClick(e){
     let data = {
         id:this.dataset.id

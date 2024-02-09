@@ -9,6 +9,7 @@
     <main>
         <div class="container">
             <div class="row">
+{{--             запуск цикла который получает пагинатор из 12 елементов      --}}
                 @foreach($products as $product)
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                     <article class="card mt-5 overflow-hidden @if($product->discount) border-primary @endif  product__card" data-id="{{$product->id}}">
@@ -28,7 +29,7 @@
                                         В корзину
                                     </a>
                                 @endguest
-
+{{--                              ограничения для авторизированного пользователя или нет, и проверка находится ли товар в корзине         --}}
                                 @auth
                                     @if(!$carts->contains($product->id))
                                     <button class="btn btn-primary btn-add__cart" >
@@ -49,6 +50,8 @@
                 </div>
                 @endforeach
             </div>
+
+{{--  блок навигации для пагинатора --}}
          {{$products->links()}}
         </div>
     </main>
