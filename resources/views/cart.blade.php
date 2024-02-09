@@ -8,13 +8,13 @@
         <div class="container">
             <h1 class="text-center mt-5">Корзина</h1>
             <div class="row mb-4">
-            @if(!count($products))
+           @if(!count($products))
                 <div class="col-12 col-lg-8">
                     <h2>Корзина пуста</h2>
                 </div>
-            @endif
-            @foreach($products as $product)
+           @else
                 <div class="col-12 col-lg-8">
+                    @foreach($products as $product)
                     <article class="card mt-4 overflow-hidden">
                         <div class="row">
                             <div class="col-12 col-sm-4">
@@ -28,24 +28,29 @@
                                        {{$product->description}}
                                     </h3>
                                     <p>
-                                        {{$products->where('id',$product->id)->first()->pivot->count}}
+                                        Кол-во -  {{$products->where('id',$product->id)->first()->pivot->count}} шт.
                                     </p>
                                     <p class="fw-bold fs-6 m-0">
                                         цена без скидки - {{$product->price}} ₽ / шт.
                                     </p>
-
+                                    @if($product->discount)
+                                    <p class="fw-bold fs-6 m-0">
+                                        с учётом скидки <span>{{round($avg,2)}}%</span> - {{round((($product->price)*(100-$avg)/100),2)}} ₽ / шт.
+                                    </p>
+                                     @endif
                                 </div>
                             </div>
                         </div>
                     </article>
+                    @endforeach
                 </div>
-            @endforeach
+           @endif
                 <div class="col-12 col-lg-4">
                     <div class="card p-3 mt-4">
                         <p class="fs-4">Общая сумма заказа:</p>
-                        <p class="fw-bold">773 280 ₽</p>
-                        <p class="fs-4">Общая сумма заказа c учётом скидки <span>5%</span>:</p>
-                        <p class="fw-bold">734 616 ₽</p>
+                        <p class="fw-bold">{{round($beforePrice,2)}} ₽</p>
+                        <p class="fs-4">Общая сумма заказа c учётом скидки <span>{{round($totalDiscount,2)}}%</span>:</p>
+                        <p class="fw-bold">{{round($afterPrice,2)}} ₽</p>
                         <button class="btn btn-primary">Заказать</button>
                     </div>
                 </div>

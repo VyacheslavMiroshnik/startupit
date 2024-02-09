@@ -8,11 +8,62 @@ use Illuminate\Support\Facades\Auth;
 
 class CartsController extends Controller
 {
-    public function index()
+    private function calcDiscount()
+
     {
         $user = Auth::user();
-        $carts = $user->products;
-        return view('cart',['products'=>$carts]);
+        $bonus = $user->bonus()->first()->bonus;
+        $products = $user->products;
+        if(!count($products))
+        {
+            return  [
+                'products'=>$products,
+                'beforePrice'=>0,
+                'totalDiscount'=>0,
+                'avg'=>0,
+                'afterPrice'=>0];;
+        }
+
+        $beforePrice =self::sumPrice($products);
+
+
+        $productDiscountPrice =self::sumPrice($products->where('discount',1));
+
+        if($bonus>$productDiscountPrice)
+        {
+            $avgForDiscount = 100;
+        } else
+        {
+            $avgForDiscount = $bonus * 100 /$productDiscountPrice;
+        }
+
+        $totalDiscount = $productDiscountPrice*$avgForDiscount /$beforePrice;
+        $afterPrice = $beforePrice * (100-$totalDiscount) / 100;
+        return [
+            'products'=>$products,
+            'beforePrice'=>$beforePrice,
+            'totalDiscount'=>$totalDiscount,
+            'avg'=>$avgForDiscount,
+            'afterPrice'=>$afterPrice];
+    }
+
+
+    private function sumPrice($products)
+    {
+        $sum = 0;
+
+        foreach($products as $product)
+        {
+            $sum +=  $product->price * $product->pivot->count ;
+        }
+
+
+        return $sum;
+
+    }
+    public function index()
+    {
+        return view('cart',self::calcDiscount());
     }
 
     /* Добавляет новый товар в корзину возвращает  */

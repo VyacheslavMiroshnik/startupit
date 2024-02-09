@@ -18,16 +18,22 @@ class UserSeeder extends Seeder
             'name'=>'admin',
             'email'=>'admin@admin.ru',
             'password'=>Hash::make('password')
+        ])->bonus()->create([
+            'bonus'=>1000
         ]);
         User::factory()->create([
             'name'=>'user',
             'email'=>'user@user.ru',
             'password'=>Hash::make('password')
+        ])->bonus()->create([
+            'bonus'=>12000
         ]);
         User::factory()->create([
             'name'=>'startupit',
             'email'=>'startupit@startupit.ru',
             'password'=>Hash::make('startupit.ru')
+        ])->bonus()->create([
+            'bonus'=>22000
         ]);
     }
 }

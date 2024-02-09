@@ -20,7 +20,8 @@ class ProductsFactory extends Factory
         return [
             'description'=>fake()->text(150),
             'price'=>fake()->numberBetween(100,100000),
-            'img'=>fake()->randomElement($imgList)
+            'img'=>fake()->randomElement($imgList),
+            'discount'=>fake()->boolean()
         ];
     }
 }

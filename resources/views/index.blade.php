@@ -11,7 +11,7 @@
             <div class="row">
                 @foreach($products as $product)
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                    <article class="card mt-5 overflow-hidden border-primary  product__card" data-id="{{$product->id}}">
+                    <article class="card mt-5 overflow-hidden @if($product->discount) border-primary @endif  product__card" data-id="{{$product->id}}">
                         <div class="img-wrap">
                             <img class="w-100" src="{{asset('storage/img')}}/{{$product->img}}" alt="Изображение товара">
                         </div>
@@ -21,7 +21,7 @@
                             </h3>
                             <div class="d-flex align-items-center justify-content-between">
                                 <p class="fw-bold fs-5 m-0">
-                                    {{$product->price}}
+                                    {{$product->price}}  ₽
                                 </p>
                                 @guest
                                     <a class="btn btn-primary btn-add__cart"  href="{{route('login')}}">
