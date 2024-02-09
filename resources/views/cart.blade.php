@@ -31,11 +31,13 @@
                                         {{$products->where('id',$product->id)->first()->pivot->count}}
                                     </p>
                                     <p class="fw-bold fs-6 m-0">
-                                        цена без скидки - {{$products->sum('price')}} ₽ / шт.
+                                        цена без скидки - {{$product->price}} ₽ / шт.
                                     </p>
+                                    @if($product->discount)
                                     <p class="fw-bold fs-6 m-0">
-                                        с учётом скидки <span>5%</span> - 734 616 ₽ / шт.
+                                        с учётом скидки <span>{{round($avg,2)}}%</span> - {{round((($product->price)*(100-$avg)/100),2)}} ₽ / шт.
                                     </p>
+                                     @endif
                                 </div>
                             </div>
                         </div>
@@ -45,9 +47,9 @@
                 <div class="col-12 col-lg-4">
                     <div class="card p-3 mt-4">
                         <p class="fs-4">Общая сумма заказа:</p>
-                        <p class="fw-bold">773 280 ₽</p>
-                        <p class="fs-4">Общая сумма заказа c учётом скидки <span>5%</span>:</p>
-                        <p class="fw-bold">734 616 ₽</p>
+                        <p class="fw-bold">{{round($beforePrice,2)}} ₽</p>
+                        <p class="fs-4">Общая сумма заказа c учётом скидки <span>{{round($totalDiscount,2)}}%</span>:</p>
+                        <p class="fw-bold">{{round($afterPrice,2)}} ₽</p>
                         <button class="btn btn-primary">Заказать</button>
                     </div>
                 </div>

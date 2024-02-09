@@ -13,31 +13,41 @@ class CartsController extends Controller
     {
         $user = Auth::user();
         $bonus = $user->bonus()->first()->bonus;
-        $carts = $user->products;
-
-        $beforePrice = $carts->sum('price');
-
-
+        $products = $user->products;
+        $beforePrice =self::sumPrice($products);
         if(!$beforePrice)
         {
             return ['products'=>[]];
         }
-        $canDiscountPrice = $carts->where('discount',1)->sum('price');
+        $productDiscountPrice =self::sumPrice($products->where('discount',1));
 
-        if($bonus>$canDiscountPrice)
+        if($bonus>$productDiscountPrice)
         {
-            $user->bonus()->first()->bonus = $bonus - $canDiscountPrice;
-            $avgForDiscount = 1;
+            $avgForDiscount = 100;
         } else
         {
-            $user->bonus()->first()->bonus = $bonus - $canDiscountPrice;
-            $avgForDiscount = ($bonus * 100 /$canDiscountPrice)/100;
+            $avgForDiscount = $bonus * 100 /$productDiscountPrice;
         }
 
-        $user->bonus()->first()->save();;
-        $totalDiscount = $canDiscountPrice*$avgForDiscount *100/$beforePrice;
+        $totalDiscount = $productDiscountPrice*$avgForDiscount /$beforePrice;
+
+
         $afterPrice = $beforePrice * (100-$totalDiscount) / 100;
-        return ['products'=>$carts,'beforePrice'=>$beforePrice,"totalDiscount"=>$totalDiscount,'avg'=>$avgForDiscount,'afterPrice'=>$afterPrice];
+
+        return ['products'=>$products,'beforePrice'=>$beforePrice,"totalDiscount"=>$totalDiscount,'avg'=>$avgForDiscount,'afterPrice'=>$afterPrice];
+    }
+
+
+    private function sumPrice($products)
+    {
+        $sum = 0;
+        foreach($products as $product)
+        {
+            $sum +=  $product->price * $product->pivot->first()->count ;
+        }
+
+        return $sum;
+
     }
     public function index()
     {
