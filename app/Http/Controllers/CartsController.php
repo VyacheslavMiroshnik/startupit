@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\AddRequest;
+use App\Http\Requests\DeleteRequest;
+use App\Http\Requests\UpdateRequest;
 use App\Models\Products;
 use App\Models\User;
 use App\Services\CartService;
@@ -13,6 +16,8 @@ use Illuminate\Support\Facades\View;
 
 class CartsController extends Controller
 {
+    private CartService $cartService;
+    private ProductsService $productsService;
     public function __construct(CartService $cartService, ProductsService $productsService)
     {
         $this->cartService = $cartService;
@@ -32,7 +37,7 @@ class CartsController extends Controller
      * Добавляет новый товар в корзину возвращает
      * @return JsonResponse
      */
-    public function add(Request $request)
+    public function add(AddRequest $request)
     {
         $user = Auth::user();
         $this->cartService->add($request, $user);
@@ -42,7 +47,7 @@ class CartsController extends Controller
      *  Обновляет данные в корзине
      *  @return JsonResponse
      */
-    public function update(Request $request)
+    public function update(UpdateRequest $request)
     {
         $user = Auth::user();
         $res = $this->productsService->updateCard($request, $user);
@@ -52,7 +57,7 @@ class CartsController extends Controller
      *  Удаляет данные из корзины
      *  @return JsonResponse
      */
-    public function delete(Request $request )
+    public function delete(DeleteRequest $request )
     {
         $user = Auth::user();
         $this->cartService->delete($request);

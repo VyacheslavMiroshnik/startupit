@@ -13,7 +13,7 @@ $(".product__card").click(onClick);
 })
 function onClick(e){
     let data = {
-        id:this.dataset.id
+        id : this.dataset.id
     };
     const parent = this.parentNode;
     let headers = {
@@ -27,7 +27,7 @@ function onClick(e){
         url = 'cart/update';
     }
     if(e.target.closest('.btn-diff__product')){
-        let count = --this.querySelector(".count").textContent
+        let count = --this.querySelector('.count').textContent
         if(count == 0){
             $('.cart__counter').hide();
             $('.btn-add__cart').show();

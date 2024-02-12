@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
+    private ProductsService $productsService;
     public function __construct(ProductsService $productsService)
     {
         $this->productService = $productsService;

@@ -13,7 +13,7 @@ class CartService
     public function calcDiscount()
     {
         $user = Auth::user();
-        $bonus = $user->bonus()->first()->bonus;
+        $bonus = $user->first()->bonus;
         $products = $user->products;
         if(!count($products)) {
             return  [

@@ -16,10 +16,16 @@ class ProductsFactory extends Factory
      */
     public function definition(): array
     {
-        $imgList = ['pic-1.webp','pic-2.webp'];
+        $imgList = [
+            'web-1.jpg',
+            'web-2.jpg',
+            'web-3.jpg',
+            'web-4.jpg',
+            'web-5.jpg',
+            ];
         return [
             'description'=>fake()->text(150),
-            'price'=>fake()->numberBetween(100,100000),
+            'price'=>fake()->numberBetween(100,10000),
             'img'=>fake()->randomElement($imgList),
             'discount'=>fake()->boolean()
         ];

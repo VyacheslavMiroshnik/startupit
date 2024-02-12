@@ -19,7 +19,7 @@
         <a class="text-light text-decoration-none fs-4" href="{{route('index')}}">НА ГЛАВНУЮ</a>
     @auth
         <div class="d-flex flex-column align-items-center">
-            <span class="bg-primary fs-6 text-light px-2 rounded-pill">{{Auth::user()->bonus()->first()->bonus}} баллов</span>
+            <span class="bg-primary fs-6 text-light px-2 rounded-pill">{{Auth::user()->first()->bonus}} баллов</span>
             <span class="login text-light fs-6">{{Auth::user()->email}}</span>
         </div>
     @endauth

@@ -15,25 +15,22 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         User::factory()->create([
-            'name'=>'admin',
-            'email'=>'admin@admin.ru',
-            'password'=>Hash::make('password')
-        ])->bonus()->create([
-            'bonus'=>1000
+            'name' => 'admin',
+            'email' => 'admin@admin.ru',
+            'password' => Hash::make('password'),
+            'bonus' => 1000
         ]);
         User::factory()->create([
-            'name'=>'user',
-            'email'=>'user@user.ru',
-            'password'=>Hash::make('password')
-        ])->bonus()->create([
-            'bonus'=>12000
+            'name' => 'user',
+            'email' => 'user@user.ru',
+            'password' => Hash::make('password'),
+            'bonus' => 12000
         ]);
         User::factory()->create([
-            'name'=>'startupit',
-            'email'=>'startupit@startupit.ru',
-            'password'=>Hash::make('startupit.ru')
-        ])->bonus()->create([
-            'bonus'=>22000
+            'name' => 'startupit',
+            'email' => 'startupit@startupit.ru',
+            'password' => Hash::make('startupit.ru'),
+            'bonus' => 22000
         ]);
     }
 }
