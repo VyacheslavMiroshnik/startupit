@@ -15,21 +15,20 @@ class CartService
         $user = Auth::user();
         $bonus = $user->first()->bonus;
         $products = $user->products;
-        if(!count($products)) {
+        if (!count($products)) {
             return  [
                 'products' => $products,
                 'beforePrice' => 0,
                 'totalDiscount' => 0,
                 'avg' => 0,
-                'afterPrice' => 0];
+                'afterPrice' => 0
+            ];
         }
-        $beforePrice =self::sumPrice($products);
-        $productDiscountPrice =self::sumPrice($products->where('discount', 1));
-        if($bonus>$productDiscountPrice)
-        {
+        $beforePrice = self::sumPrice($products);
+        $productDiscountPrice = self::sumPrice($products->where('discount', 1));
+        if ($bonus>$productDiscountPrice) {
             $avgForDiscount = 100;
-        } else
-        {
+        } else {
             $avgForDiscount = $bonus * 100 / $productDiscountPrice;
         }
 

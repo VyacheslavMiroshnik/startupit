@@ -9,7 +9,4 @@ class Carts extends Model
 {
     use HasFactory;
     protected  $fillable = [];
-
-
-
 }

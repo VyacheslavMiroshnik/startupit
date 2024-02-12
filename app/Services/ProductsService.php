@@ -42,13 +42,12 @@ class ProductsService
      */
     public function index()
     {
-        $user=Auth::user();
-        $carts= [];
-        if($user)
-        {
+        $user = Auth::user();
+        $carts = [];
+        if ($user) {
             $carts = $user->products;
         }
         $productsPaginated = Products::paginate(12);
-        return ['products'=>$productsPaginated,'carts'=>$carts];
+        return ['products' => $productsPaginated, 'carts' => $carts];
     }
 }
