@@ -43,9 +43,18 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    /**
+     * Создаем связь многии ко многим
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function products()
     {
-        return $this->belongsToMany(Products::class,'carts','user_id','product_id')->withPivot('count');
+        return $this->belongsToMany(
+            Products::class,
+            'carts',
+            'user_id',
+            'product_id'
+        )->withPivot('count');
     }
 
     public function bonus()

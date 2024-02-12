@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ru">
-
+{{--
+    Шапка сайта с подключение основных стилей и с блоком header доступным на любой странице сайта
+--}}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +17,6 @@
 <header class="bg-dark py-2 py-md-3">
     <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 gap-md-1">
         <a class="text-light text-decoration-none fs-4" href="{{route('index')}}">НА ГЛАВНУЮ</a>
-        <!-- TODO: скрывать, когда пользователь не авторизован -->
     @auth
         <div class="d-flex flex-column align-items-center">
             <span class="bg-primary fs-6 text-light px-2 rounded-pill">{{Auth::user()->bonus()->first()->bonus}} баллов</span>
@@ -47,7 +48,7 @@
                 </svg>
             </a>
         @endguest
-            <!-- Кнопка выйти -->
+
             @auth
                 <form action={{route('logout')}} method="POST" >
                     @csrf

@@ -8,6 +8,10 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
+    /**
+     * Стартовая страница
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+     */
     public function index()
     {
         $user=Auth::user();

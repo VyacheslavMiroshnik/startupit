@@ -1,6 +1,7 @@
-{{--        Компонент  идентичен, карточке товара из главного меню. Использую для
-            отправки на фронтенда для обновления карточки без перезагрузки страницы                  --}}
-            <!-- TODO: добавлять синюю рамку карточке товара (класс border-primary), если на товар можно потратить баллы -->
+{{--
+    Компонент  идентичен, карточке товара из главного меню. Использую для
+    отправки на фронтенда для обновления карточки без перезагрузки страницы
+--}}
             <article class="card mt-5 overflow-hidden border-primary  product__card" data-id="{{$product->id}}">
                 <div class="img-wrap">
                     <img class="w-100" src="{{asset('storage/img')}}/{{$product->img}}" alt="Изображение товара">
@@ -25,7 +26,6 @@
                                     В корзину
                                 </button>
                             @else
-                                <!-- TODO: этот блок появлется после нажатия кнопки "В корзину" -->
                                 <div class="d-flex align-items-center gap-3  cart__counter">
                                     <button class="btn btn-outline-primary btn-diff__product">-</button>
                                     <span class="count">{{$carts->where('id',$product->id)->first()->pivot->count}}</span>
