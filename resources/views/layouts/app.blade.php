@@ -16,15 +16,15 @@
 <body>
 <header class="bg-dark py-2 py-md-3">
     <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2 gap-md-1">
-        <a class="text-light text-decoration-none fs-4" href="{{route('index')}}">НА ГЛАВНУЮ</a>
+        <a class="text-light text-decoration-none fs-4" href="{{ route('index') }}">НА ГЛАВНУЮ</a>
     @auth
         <div class="d-flex flex-column align-items-center">
-            <span class="bg-primary fs-6 text-light px-2 rounded-pill">{{Auth::user()->first()->bonus}} баллов</span>
-            <span class="login text-light fs-6">{{Auth::user()->email}}</span>
+            <span class="bg-primary fs-6 text-light px-2 rounded-pill">{{ Auth::user()->first()->bonus }} баллов</span>
+            <span class="login text-light fs-6">{{ Auth::user()->email }}</span>
         </div>
     @endauth
         <div class = 'd-flex'>
-            <a class="btn" href="{{route('carts')}}" title="Корзина">
+            <a class="btn" href="{{ route('carts') }}" title="Корзина">
                 <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M7.5 18C8.32843 18 9 18.6716 9 19.5C9 20.3284 8.32843 21 7.5 21C6.67157 21 6 20.3284 6 19.5C6 18.6716 6.67157 18 7.5 18Z"
@@ -38,7 +38,7 @@
                 </svg>
             </a>
         @guest
-            <a class="btn" href={{route('login')}} title="Войти">
+            <a class="btn" href={{ route('login') }} title="Войти">
                 <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2.00098 11.999L16.001 11.999M16.001 11.999L12.501 8.99902M16.001 11.999L12.501 14.999"
                           stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
@@ -50,7 +50,7 @@
         @endguest
 
             @auth
-                <form action={{route('logout')}} method="POST" >
+                <form action={{ route('logout') }} method="POST" >
                     @csrf
                     <button class="btn btn-exit" title="Выйти">
                         <svg width="35px" height="35px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

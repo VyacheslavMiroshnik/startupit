@@ -26,16 +26,16 @@
                         <div class="row">
                             <div class="col-12 col-sm-4">
                                 <div class="img-wrap">
-                                    <img class="w-100" src="{{asset('storage/img')}}/{{$product->img}}" alt="Изображение товара">
+                                    <img class="w-100" src="{{ asset('storage/img') }}/{{ $product->img }}" alt="Изображение товара">
                                 </div>
                             </div>
                             <div class="col-12 col-sm-8 d-flex align-items-center">
                                 <div class="p-3">
                                     <h3 class="fs-6 mb-2">
-                                       {{$product->description}}
+                                       {{ $product->description }}
                                     </h3>
                                     <p>
-                                        Кол-во -  {{$products->where('id',$product->id)->first()->pivot->count}} шт.
+                                        Кол-во -  {{ $products->where('id', $product->id)->first()->pivot->count }} шт.
                                     </p>
                                     <p class="fw-bold fs-6 m-0">
                                         цена без скидки - {{$product->price}} ₽ / шт.
@@ -45,7 +45,7 @@
 --}}
                                     @if($product->discount)
                                     <p class="fw-bold fs-6 m-0">
-                                        с учётом скидки <span>{{round($avg,2)}}%</span> - {{round((($product->price)*(100-$avg)/100),2)}} ₽ / шт.
+                                        с учётом скидки <span>{{ round($avg, 2) }}%</span> - {{ round((($product->price) * (100 - $avg) / 100), 2) }} ₽ / шт.
                                     </p>
                                      @endif
                                 </div>
@@ -58,9 +58,9 @@
                 <div class="col-12 col-lg-4">
                     <div class="card p-3 mt-4">
                         <p class="fs-4">Общая сумма заказа:</p>
-                        <p class="fw-bold">{{round($beforePrice,2)}} ₽</p>
-                        <p class="fs-4">Общая сумма заказа c учётом скидки <span>{{round($totalDiscount,2)}}%</span>:</p>
-                        <p class="fw-bold">{{round($afterPrice,2)}} ₽</p>
+                        <p class="fw-bold">{{ round($beforePrice, 2) }} ₽</p>
+                        <p class="fs-4">Общая сумма заказа c учётом скидки <span>{{ round($totalDiscount, 2) }}%</span>:</p>
+                        <p class="fw-bold">{{ round($afterPrice, 2) }} ₽</p>
                         <button class="btn btn-primary">Заказать</button>
                     </div>
                 </div>
