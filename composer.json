@@ -49,6 +49,7 @@
         ],
         "project-start": [
             "npm install",
+            "npm run build",
             "@php artisan key:generate --ansi",
             "@php artisan storage:link"
         ],
