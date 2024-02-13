@@ -9,13 +9,12 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.3",
-        "laravel/tinker": "^2.8",
-        "laravel/ui": "^4.4"
+        "laravel/tinker": "^2.8"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
-        "laravel/sail": "^1.27",
+        "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
         "phpunit/phpunit": "^10.1",
@@ -46,17 +45,7 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
-        ],
-        "project-start": [
-            "npm install",
-            "@php artisan key:generate --ansi",
-            "@php artisan storage:link"
-        ],
-        "migrate":[
-            "@php artisan migrate",
-            "@php artisan DB:seed"
         ]
-
     },
     "extra": {
         "laravel": {
